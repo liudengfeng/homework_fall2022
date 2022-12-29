@@ -6,7 +6,7 @@ from cs285.infrastructure.replay_buffer import ReplayBuffer
 from cs285.infrastructure.utils import *
 from cs285.policies.MLP_policy import MLPPolicyAC
 from .base_agent import BaseAgent
-import gym
+import gymnasium as gym
 from cs285.policies.sac_policy import MLPPolicySAC
 from cs285.critics.sac_critic import SACCritic
 import cs285.infrastructure.pytorch_util as ptu

@@ -3,7 +3,7 @@ implementing DQN."""
 import random
 from collections import namedtuple
 
-import gym
+import gymnasium as gym
 import numpy as np
 from torch import nn
 import torch.optim as optim

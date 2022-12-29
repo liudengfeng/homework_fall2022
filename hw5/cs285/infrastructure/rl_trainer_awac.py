@@ -5,8 +5,8 @@ import sys
 import time
 import pdb
 
-import gym
-from gym import wrappers
+import gymnasium as gym
+from gymnasium import wrappers
 import numpy as np
 import torch
 from cs285.infrastructure import pytorch_util as ptu
@@ -89,7 +89,7 @@ class RL_Trainer(object):
             self.eval_env = wrappers.RecordVideo(self.eval_env, os.path.join(self.params['logdir'], "gym"), episode_trigger=self.episode_trigger)
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
-        self.env.seed(seed)
+        self.env.reset(seed=seed)
         self.eval_env.seed(seed)
 
         # Maximum length for episodes

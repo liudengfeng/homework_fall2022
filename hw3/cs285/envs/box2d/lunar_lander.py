@@ -4,8 +4,8 @@ import numpy as np
 import Box2D
 from Box2D.b2 import (edgeShape, circleShape, fixtureDef, polygonShape, revoluteJointDef, contactListener)
 
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 from gym.utils import seeding
 
 import pyglet

@@ -1,5 +1,7 @@
 ## Install dependencies
 
++ 使用最新版本`gymnasium`
+
 There are two options:
 
 A. (Recommended) Install with conda:

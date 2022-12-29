@@ -4,8 +4,8 @@ import os
 import sys
 import time
 
-import gym
-from gym import wrappers
+import gymnasium as gym
+from gymnasium import wrappers
 import numpy as np
 import torch
 
@@ -56,7 +56,7 @@ class RL_Trainer(object):
             self.env = gym.make(self.params['env_name'])
         else:
             self.env = gym.make(self.params['env_name'], render_mode='rgb_array')
-        self.env.seed(seed)
+        self.env.reset(seed=seed)
 
         # import plotting (locally if 'obstacles' env)
         if not(self.params['env_name']=='obstacles-cs285-v0'):

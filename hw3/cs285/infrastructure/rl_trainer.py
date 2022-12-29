@@ -5,8 +5,8 @@ import sys
 import time
 from cs285.infrastructure.atari_wrappers import ReturnWrapper
 
-import gym
-from gym import wrappers
+import gymnasium as gym
+from gymnasium import wrappers
 import numpy as np
 import torch
 from cs285.infrastructure import pytorch_util as ptu
@@ -75,7 +75,7 @@ class RL_Trainer(object):
             self.mean_episode_reward = -float('nan')
             self.best_mean_episode_reward = -float('inf')
 
-        self.env.seed(seed)
+        self.env.reset(seed=seed)
 
         # import plotting (locally if 'obstacles' env)
         if not(self.params['env_name']=='obstacles-cs285-v0'):
