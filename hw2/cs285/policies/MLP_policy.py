@@ -7,7 +7,7 @@ from torch import optim
 import numpy as np
 import torch
 from torch import distributions
-
+from cs285.infrastructure.utils import normalize
 from cs285.infrastructure import pytorch_util as ptu
 from cs285.policies.base_policy import BasePolicy
 
@@ -90,13 +90,20 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
 
     # query the policy with observation(s) to get selected action(s)
     def get_action(self, obs: np.ndarray) -> np.ndarray:
-        # TODO: get this from HW1
-        pass
+        if len(obs.shape) > 1:
+            observation = obs
+        else:
+            observation = np.expand_dims(obs, 0)
+
+        # return the action that the policy prescribes
+        observation = ptu.from_numpy(observation)
+        action_dist = self.forward(observation).sample()
+
+        return ptu.to_numpy(action_dist)
 
     # update/train this policy
     def update(self, observations, actions, **kwargs):
-        # raise NotImplementedError
-        pass
+        raise NotImplementedError
 
     # This function defines the forward pass of the network.
     # You can return anything you want, but you should be able to differentiate
@@ -135,25 +142,46 @@ class MLPPolicyPG(MLPPolicy):
         actions = ptu.from_numpy(actions)
         advantages = ptu.from_numpy(advantages)
 
-        # TODO: update the policy using policy gradient
+        # update the policy using policy gradient
         # HINT1: Recall that the expression that we want to MAXIMIZE
         # is the expectation over collected trajectories of:
         # sum_{t=0}^{T-1} [grad [log pi(a_t|s_t) * (Q_t - b_t)]]
         # HINT2: you will want to use the `log_prob` method on the distribution returned
         # by the `forward` method
 
-        # TODO
+        actions_distribution = self.forward(observations)
+        log_probs = actions_distribution.log_prob(actions)
+
+        loss = -(log_probs * advantages).mean()
+
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
+
+        train_log = {
+            "train_loss": ptu.to_numpy(loss),
+        }
 
         if self.nn_baseline:
-            ## TODO: update the neural network baseline using the q_values as
+            ## update the neural network baseline using the q_values as
             ## targets. The q_values should first be normalized to have a mean
             ## of zero and a standard deviation of one.
 
             ## Note: You will need to convert the targets into a tensor using
             ## ptu.from_numpy before using it in the loss
 
-            # TODO
-            pass
+            targets = normalize(q_values, q_values.mean(), q_values.std())
+            targets = ptu.from_numpy(targets)
+
+            baseline_predictions = self.baseline(observations).squeeze()
+
+            baseline_loss = F.mse_loss(baseline_predictions, targets)
+
+            self.baseline_optimizer.zero_grad()
+            baseline_loss.backward()
+            self.baseline_optimizer.step()
+
+            train_log["baseline_loss"] = ptu.to_numpy(baseline_loss)
 
         train_log = {
             "Training Loss": ptu.to_numpy(loss),
