@@ -68,8 +68,9 @@ def sample_trajectories(
     timesteps_this_batch = 0
     paths = []
     while timesteps_this_batch < min_timesteps_per_batch:
-
-        TODO
+        path = sample_trajectory(env, policy, max_path_length, render)
+        paths.append(path)
+        timesteps_this_batch += get_pathlength(paths[-1])
 
     return paths, timesteps_this_batch
 
@@ -82,8 +83,8 @@ def sample_n_trajectories(env, policy, ntraj, max_path_length, render=False):
     Hint1: use sample_trajectory to get each path (i.e. rollout) that goes into paths
     """
     paths = []
-
-    TODO
+    for _ in range(ntraj):
+        paths.append(sample_trajectory(env, policy, max_path_length, render))
 
     return paths
 
