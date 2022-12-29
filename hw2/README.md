@@ -47,3 +47,41 @@ each iteration).
 advantages to have a mean of zero and standard deviation of one.
 - -rtg : Flag: if present, sets reward_to_go=True. Otherwise, reward_to_go=False by default.
 - --exp_name : Name for experiment, which goes into the name for the data logging directory.
+
+## Experiment 2 (InvertedPendulum)
+
+```bash
+python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v4 \
+--ep_len 1000 --discount 0.9 -n 100 -l 2 -s 64 -b 512 -lr 0.05 -rtg \
+--exp_name q2_b512_r0.05
+```
+
+```bash
+python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v4 \
+--ep_len 1000 --discount 0.9 -n 100 -l 2 -s 64 -b 512 -lr 0.02 -rtg \
+--exp_name q2_b512_r0.02
+```
+
+```bash
+python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v4 \
+--ep_len 1000 --discount 0.9 -n 100 -l 2 -s 64 -b 512 -lr 0.01 -rtg \
+--exp_name q2_b512_r0.01
+```
+
+```bash
+python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v4 \
+--ep_len 1000 --discount 0.9 -n 100 -l 2 -s 64 -b 1024 -lr 0.01 -rtg \
+--exp_name q2_b1024_r0.01
+```
+
+```bash
+python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v4 \
+--ep_len 1000 --discount 0.9 -n 100 -l 2 -s 64 -b 2048 -lr 0.01 -rtg \
+--exp_name q2_b2048_r0.01
+```
+
+```bash
+python cs285/scripts/run_hw2.py --env_name InvertedPendulum-v4 \
+--ep_len 1000 --discount 0.9 -n 100 -l 2 -s 64 -b 2048 -lr 0.02 -rtg \
+--exp_name q2_b2048_r0.02
+```
