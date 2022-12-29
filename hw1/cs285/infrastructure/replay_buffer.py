@@ -17,7 +17,7 @@ class ReplayBuffer(object):
         self.terminals = None
 
     def __len__(self):
-        if self.obs:
+        if self.obs is not None:
             return self.obs.shape[0]
         else:
             return 0
@@ -83,7 +83,7 @@ class ReplayBuffer(object):
         return (
             self.obs[batch_indices],
             self.acs[batch_indices],
-            self.rewards[batch_indices],
+            self.rews[batch_indices],
             self.next_obs[batch_indices],
             self.terminals[batch_indices],
         )
