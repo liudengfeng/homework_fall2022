@@ -89,7 +89,7 @@ class MLPPolicy(BasePolicy, nn.Module, metaclass=abc.ABCMeta):
         if len(obs.shape) > 1:
             observation = obs
         else:
-            observation = obs[None]
+            observation = np.expand_dims(obs, 0)
         observation = ptu.from_numpy(observation)
         action_distribution = self(observation)
         action = action_distribution.sample()  # don't bother with rsample
