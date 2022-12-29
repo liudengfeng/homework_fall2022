@@ -1,6 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "hw2"
+        "hw1"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
