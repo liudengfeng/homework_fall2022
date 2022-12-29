@@ -6,10 +6,11 @@
 Run multiple experiments with the PG algorithm on the discrete CartPole-v1
 environment, using the following commands:
 
+- `--video_log_freq 1` 显示训练及评估视频
+
 ```bash
 python cs285/scripts/run_hw2.py --env_name CartPole-v1 -n 100 -b 1000 \
--dsa --exp_name q1_sb_no_rtg_dsa \
---video_log_freq 1
+-dsa --exp_name q1_sb_no_rtg_dsa
 ```
 
 ```bash
