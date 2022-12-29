@@ -33,7 +33,7 @@ def perform_actions(env, actions):
     for ac in actions:
         obs.append(ob)
         acs.append(ac)
-        ob, rew, done, _ = env.step(ac)
+        ob, rew, done, truncated, _ = env.step(ac)
         # add the observation after taking a step to next_obs
         next_obs.append(ob)
         rewards.append(rew)
@@ -164,7 +164,7 @@ def eval_trajectory(env, policy, max_path_length, render=False, render_mode=('rg
         ac = policy.get_action(ob, sample=False)
         ac = ac[0]
         acs.append(ac)
-        ob, rew, done, _ = env.step(ac)
+        ob, rew, done, truncated, _ = env.step(ac)
         # add the observation after taking a step to next_obs
         next_obs.append(ob)
         rewards.append(rew)
@@ -218,7 +218,7 @@ def sample_random_trajectory(env, max_path_length, render=False, render_mode=('r
         obs.append(ob)
         ac = env.action_space.sample()
         acs.append(ac)
-        ob, rew, done, _ = env.step(ac)
+        ob, rew, done, truncated, _ = env.step(ac)
         # add the observation after taking a step to next_obs
         next_obs.append(ob)
         rewards.append(rew)
