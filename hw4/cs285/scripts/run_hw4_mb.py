@@ -104,20 +104,12 @@ def main():
     params = vars(args)
 
     # HARDCODE EPISODE LENGTHS FOR THE ENVS USED IN THIS MB ASSIGNMENT
-    # if params["env_name"] == "reacher-cs285-v0":
-    #     params["ep_len"] = 200
-    # if params["env_name"] == "cheetah-cs285-v0":
-    #     params["ep_len"] = 500
-    # if params["env_name"] == "obstacles-cs285-v0":
-    #     params["ep_len"] = 100
     if params["env_name"] == "reacher-cs285-v0":
         params["ep_len"] = 200
-    elif params["env_name"] == "HalfCheetah-v4":
-        params["ep_len"] = 1000
-    else:
-        raise NotImplementedError("不支持环境".format(params["env_name"]))
-    # if params["env_name"] == "obstacles-cs285-v0":
-    #     params["ep_len"] = 100
+    if params["env_name"] == "cheetah-cs285-v0":
+        params["ep_len"] = 500
+    if params["env_name"] == "obstacles-cs285-v0":
+        params["ep_len"] = 100
 
     ##################################
     ### CREATE DIRECTORY FOR LOGGING

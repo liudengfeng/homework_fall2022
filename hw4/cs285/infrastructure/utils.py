@@ -29,13 +29,13 @@ def calculate_mean_prediction_error(env, action_sequence, models, data_statistic
 
 
 def perform_actions(env, actions):
-    ob, _ = env.reset()
+    ob = env.reset()
     obs, acs, rewards, next_obs, terminals, image_obs = [], [], [], [], [], []
     steps = 0
     for ac in actions:
         obs.append(ob)
         acs.append(ac)
-        ob, rew, done, truncated, _ = env.step(ac)
+        ob, rew, done, _ = env.step(ac)
         # add the observation after taking a step to next_obs
         next_obs.append(ob)
         rewards.append(rew)
@@ -60,7 +60,7 @@ def mean_squared_error(a, b):
 
 
 def sample_trajectory(env, policy, max_path_length, render=False):
-    ob, _ = env.reset()
+    ob = env.reset()
 
     # init vars
     obs, acs, rewards, next_obs, terminals, image_obs = [], [], [], [], [], []
@@ -77,7 +77,7 @@ def sample_trajectory(env, policy, max_path_length, render=False):
         acs.append(ac)
 
         # take that action and record results
-        ob, rew, done, truncated, _ = env.step(ac)
+        ob, rew, done, _ = env.step(ac)
 
         # record result of taking that action
         steps += 1
@@ -86,9 +86,7 @@ def sample_trajectory(env, policy, max_path_length, render=False):
 
         # end the rollout if the rollout ended
         # HINT: rollout can end due to done, or due to max_path_length
-        rollout_done = (
-            done or truncated or (steps == max_path_length)
-        )  # HINT: this is either 0 or 1
+        rollout_done = done or (steps == max_path_length)  # HINT: this is either 0 or 1
         terminals.append(rollout_done)
 
         if rollout_done:
