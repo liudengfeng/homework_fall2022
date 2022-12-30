@@ -29,7 +29,7 @@ def calculate_mean_prediction_error(env, action_sequence, models, data_statistic
 
 
 def perform_actions(env, actions):
-    ob = env.reset()
+    ob, _ = env.reset()
     obs, acs, rewards, next_obs, terminals, image_obs = [], [], [], [], [], []
     steps = 0
     for ac in actions:
@@ -225,7 +225,7 @@ def add_noise(data_inp, noiseToSignal=0.01):
 def eval_trajectory(
     env, policy, max_path_length, render=False, render_mode=("rgb_array")
 ):
-    ob = env.reset()
+    ob, _ = env.reset()
     obs, acs, rewards, next_obs, terminals, image_obs = [], [], [], [], [], []
     steps = 0
     while True:
@@ -300,7 +300,7 @@ def eval_trajectories(
 def sample_random_trajectory(
     env, max_path_length, render=False, render_mode=("rgb_array")
 ):
-    ob = env.reset()
+    ob, _ = env.reset()
     obs, acs, rewards, next_obs, terminals, image_obs = [], [], [], [], [], []
     steps = 0
     while True:

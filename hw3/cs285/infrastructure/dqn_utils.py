@@ -29,7 +29,7 @@ OptimizerSpec = namedtuple(
 def register_custom_envs():
     from gymnasium.envs.registration import registry
 
-    if "LunarLander-v3" not in registry.env_specs:
+    if "LunarLander-v3" not in registry.keys():
         register(
             id="LunarLander-v3",
             entry_point="cs285.envs.box2d.lunar_lander:LunarLander",
