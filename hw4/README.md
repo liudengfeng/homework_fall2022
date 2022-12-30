@@ -1,6 +1,6 @@
 ## Setup
 
-You can run this code on your own machine or on Google Colab. 
+You can run this code on your own machine or on Google Colab.
 
 1. **Local option:** If you choose to run locally, you will need to install some Python packages; see [installation.md](../hw1/installation.md) from homework 1 for instructions.
 
@@ -16,6 +16,7 @@ The following files have blanks to be filled with your solutions from homework 1
 - [infrastructure/utils.py](cs285/infrastructure/utils.py)
 
 You will then need to implement code in the following files:
+
 - [agents/mb_agent.py](cs285/agents/mb_agent.py)
 - [models/ff_model.py](cs285/models/ff_model.py)
 - [policies/MPC_policy.py](cs285/policies/MPC_policy.py)
@@ -28,3 +29,24 @@ You may also want to look through [scripts/run_hw4_mb.py](cs285/scripts/run_hw4_
 
 See the [assignment PDF](cs285_hw4.pdf) for more details on what files to edit.
 
+## Problem 1
+
+```bash
+python cs285/scripts/run_hw4_mb.py --exp_name q1_cheetah_n500_arch1x32 --env_name HalfCheetah-v4 \
+--add_sl_noise --n_iter 1 --batch_size_initial 20000 --num_agent_train_steps_per_iter 500 \
+--n_layers 1 --size 32 --scalar_log_freq -1 --video_log_freq -1 --mpc_action_sampling_strategy 'random'
+```
+
+```bash
+python cs285/scripts/run_hw4_mb.py --exp_name q1_cheetah_n5_arch2x250 --env_name HalfCheetah-v4 \
+--add_sl_noise --n_iter 1 --batch_size_initial 20000 --num_agent_train_steps_per_iter 5 \
+--n_layers 2 --size 250 --scalar_log_freq -1 --video_log_freq -1 --mpc_action_sampling_strategy 'random'
+```
+
+```bash
+python cs285/scripts/run_hw4_mb.py --exp_name q1_cheetah_n500_arch2x250 --env_name HalfCheetah-v4 \
+--add_sl_noise --n_iter 1 --batch_size_initial 20000 --num_agent_train_steps_per_iter 500 \
+--n_layers 2 --size 250 --scalar_log_freq -1 --video_log_freq -1 --mpc_action_sampling_strategy 'random'
+```
+
+## Problem 2
