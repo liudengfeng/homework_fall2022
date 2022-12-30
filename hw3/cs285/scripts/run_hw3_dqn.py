@@ -26,7 +26,7 @@ class Q_Trainer(object):
         self.params["agent_class"] = DQNAgent
         self.params["agent_params"] = self.agent_params
         self.params["train_batch_size"] = params["batch_size"]
-        self.params["env_wrappers"] = self.agent_params["env_wrappers"]
+        # self.params["env_wrappers"] = self.agent_params["env_wrappers"]
 
         self.rl_trainer = RL_Trainer(self.params)
 
@@ -45,8 +45,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--env_name",
-        default="MsPacman-v0",
-        choices=("PongNoFrameskip-v4", "LunarLander-v3", "MsPacman-v0"),
+        default="ALE/MsPacman-v5",
+        # choices=("PongNoFrameskip-v4", "LunarLander-v3", "MsPacman-v0"),
+        choices=("PongNoFrameskip-v4", "LunarLander-v2", "ALE/MsPacman-v5"),
     )
 
     parser.add_argument("--ep_len", type=int, default=200)

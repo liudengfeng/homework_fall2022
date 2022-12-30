@@ -29,7 +29,8 @@ OptimizerSpec = namedtuple(
 def register_custom_envs():
     from gymnasium.envs.registration import registry
 
-    if "LunarLander-v3" not in registry.keys():
+    # if "LunarLander-v3" not in registry.keys():
+    if "LunarLander-v2" not in registry.keys():
         register(
             id="LunarLander-v3",
             entry_point="cs285.envs.box2d.lunar_lander:LunarLander",
@@ -39,7 +40,7 @@ def register_custom_envs():
 
 
 def get_env_kwargs(env_name):
-    if env_name in ["MsPacman-v0", "PongNoFrameskip-v4"]:
+    if env_name in ["ALE/MsPacman-v5", "PongNoFrameskip-v4"]:
         kwargs = {
             "learning_starts": 50000,
             "target_update_freq": 10000,
@@ -49,7 +50,7 @@ def get_env_kwargs(env_name):
             "learning_freq": 4,
             "grad_norm_clipping": 10,
             "input_shape": (84, 84, 4),
-            "env_wrappers": wrap_deepmind,
+            # "env_wrappers": wrap_deepmind,
             "frame_history_len": 4,
             "gamma": 0.99,
         }
@@ -58,7 +59,8 @@ def get_env_kwargs(env_name):
             kwargs["num_timesteps"]
         )
 
-    elif env_name == "LunarLander-v3":
+    # elif env_name == "LunarLander-v3":
+    elif env_name == "LunarLander-v2":
 
         def lunar_empty_wrapper(env):
             return env
@@ -76,7 +78,7 @@ def get_env_kwargs(env_name):
             "grad_norm_clipping": 10,
             "lander": True,
             "num_timesteps": 500000,
-            "env_wrappers": lunar_empty_wrapper,
+            # "env_wrappers": lunar_empty_wrapper,
         }
         kwargs["exploration_schedule"] = lander_exploration_schedule(
             kwargs["num_timesteps"]

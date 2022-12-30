@@ -1,23 +1,23 @@
-import sys, math
-import numpy as np
+import math
+import sys
+from copy import copy
 
 import Box2D
+import gymnasium as gym
+import numpy as np
+
+# import pyglet
 from Box2D.b2 import (
-    edgeShape,
     circleShape,
+    contactListener,
+    edgeShape,
     fixtureDef,
     polygonShape,
     revoluteJointDef,
-    contactListener,
 )
-
-import gymnasium as gym
 from gymnasium import spaces
+from gymnasium.error import DependencyNotInstalled
 from gymnasium.utils import seeding
-
-import pyglet
-
-from copy import copy
 
 # Rocket trajectory optimization is a classic topic in Optimal Control.
 #
@@ -35,7 +35,7 @@ from copy import copy
 #
 # Too see heuristic landing, run:
 #
-# python gym/envs/box2d/lunar_lander.py
+# python gymnasium.envs.box2d.lunar_lander.py
 #
 # To play yourself, run:
 #
@@ -52,11 +52,6 @@ from copy import copy
 # - randomized landing site
 #
 # A good agent should be able to achieve >150 reward.
-
-MAX_NUM_STEPS = 1000
-
-N_OBS_DIM = 9
-N_ACT_DIM = 6  # num discrete actions
 
 FPS = 50
 SCALE = 30.0  # affects how fast-paced the game is, forces should be adjusted as well
@@ -77,6 +72,12 @@ SIDE_ENGINE_AWAY = 12.0
 
 VIEWPORT_W = 600
 VIEWPORT_H = 400
+
+MAX_NUM_STEPS = 1000
+
+N_OBS_DIM = 9
+N_ACT_DIM = 6  # num discrete actions
+
 
 THROTTLE_MAG = 0.75  # discretized 'on' value for thrusters
 NOOP = 1  # don't fire main engine, don't steer
@@ -582,7 +583,7 @@ if __name__ == "__main__":
     while True:
         a = heuristic(env, s)
         s, r, done, info = env.step(a)
-        env.render()
+        # env.render()
         total_reward += r
         if steps % 20 == 0 or done:
             print(["{:+0.2f}".format(x) for x in s])

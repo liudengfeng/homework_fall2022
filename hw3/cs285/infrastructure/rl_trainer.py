@@ -49,7 +49,7 @@ class RL_Trainer(object):
         #############
 
         # Make the gym environment
-        register_custom_envs()
+        # register_custom_envs()
         if self.params["agent_class"] is SACAgent:
             self.env = gym.make(
                 self.params["env_name"], max_episode_steps=self.params["ep_len"]
@@ -83,7 +83,8 @@ class RL_Trainer(object):
             self.mean_episode_reward = -float("nan")
             self.best_mean_episode_reward = -float("inf")
 
-        self.env.reset(seed=seed)
+        # self.env.reset(seed=seed)
+        self.env.reset()
 
         # import plotting (locally if 'obstacles' env)
         if not (self.params["env_name"] == "obstacles-cs285-v0"):
